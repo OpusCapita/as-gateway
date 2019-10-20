@@ -41,11 +41,6 @@ classes
 # JIRA plugin
 atlassian-ide-plugin.xml
 
-# Crashlytics plugin (for Android Studio and IntelliJ)
-com_crashlytics_export_strings.xml
-crashlytics.properties
-crashlytics-build.properties
-fabric.properties
-
-# My local oxalis home
-oxalis/*
+# Local eclipse related files
+.project
+.settings
