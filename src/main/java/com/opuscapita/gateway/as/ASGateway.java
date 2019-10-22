@@ -1,15 +1,13 @@
 package com.opuscapita.gateway.as;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@EnableAutoConfiguration
 @SpringBootApplication
-public class App {
+public class ASGateway {
 
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(ASGateway.class, args);
     }
 
 }

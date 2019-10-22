@@ -1,0 +1,9 @@
+version: '3.4'
+services:
+  main:
+    image: opuscapita/as-gateway:dev
+    command: /bin/sh ./setup-consul.sh && gradlew bootRun
+
+  tnt:
+    image: opuscapita/tnt:dev
+    command: 'npm run dev'
