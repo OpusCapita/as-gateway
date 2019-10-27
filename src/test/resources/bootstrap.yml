@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: as-gateway
+  cloud:
+    discovery:
+      enabled: false
+    consul:
+      enabled: false
+      config:
+        enabled: false
+
