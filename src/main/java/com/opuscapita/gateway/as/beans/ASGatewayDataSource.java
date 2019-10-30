@@ -1,4 +1,4 @@
-package com.opuscapita.gateway.as;
+package com.opuscapita.gateway.as.beans;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;

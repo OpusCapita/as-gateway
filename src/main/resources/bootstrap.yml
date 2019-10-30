@@ -1,16 +1,25 @@
 spring:
-  application:
-    name: as-gateway
-  cloud:
-    consul:
-      host: consul
-      port: 8500
+    application:
+        name: as-gateway
+    cloud:
+        consul:
+            host: consul
+            port: 8500
 
 ---
-
 spring:
-  profiles: local
-  cloud:
-    consul:
-      enabled: false
+    profiles: local
+    cloud:
+        consul:
+            enabled: false
 
+---
+spring:
+    profiles: test
+    cloud:
+        discovery:
+            enabled: false
+        consul:
+            enabled: false
+            config:
+                enabled: false

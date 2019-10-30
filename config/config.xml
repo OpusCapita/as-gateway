@@ -1,0 +1,24 @@
+<!--
+    Configuration for AS2 library
+-->
+<openas2>
+
+    <certificates classname="com.helger.as2lib.cert.CertificateFactory"
+                  type="pkcs12"
+                  filename="%home%/testserver.pkcs12"
+                  password="test"
+                  interval="300"/>
+
+    <partnerships classname="com.helger.as2lib.partner.SelfFillingPartnershipFactory"
+                  filename="%home%/partnerships.xml"/>
+
+    <processor classname="com.helger.as2lib.processor.DefaultMessageProcessor"
+               pendingMDN="data/pendingMDN"
+               pendingMDNinfo="data/pendinginfoMDN">
+        <module classname="com.helger.as2servlet.util.AS2ServletReceiverModule"
+                port="3056"
+                errordir="data/inbox/error"
+                errorformat="$msg.sender.as2_id$, $msg.receiver.as2_id$, $msg.headers.message-id$"/>
+    </processor>
+
+</openas2>

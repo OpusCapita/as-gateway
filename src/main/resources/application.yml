@@ -1,55 +1,67 @@
 spring:
-  application:
-    name: as-gateway
-  data:
-    rest:
-      base-path: /api
-  datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    initialization-mode: always
-    jdbcUrl: jdbc:mysql://mysql:3306/as-gateway
-    password: test
-    username: root
-  jpa:
-    hibernate:
-      ddl-auto: none
-    open-in-view: false
-    properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
-    show-sql: true
-  profiles:
-    include: commons,mysql,queue,snc
+    application:
+        name: as-gateway
+    data:
+        rest:
+            base-path: /api
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        initialization-mode: always
+        jdbcUrl: jdbc:mysql://mysql:3306/as-gateway
+        username: root
+        password: test
+    jpa:
+        hibernate:
+            ddl-auto: none
+        open-in-view: false
+        properties.hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: true
+    profiles:
+        include: commons,mysql,queue,snc
 
 server:
-  port: 3056
+    port: 3056
 
 logging:
-  level:
-    com.netflix.config.sources.URLConfigurationSource: ERROR
+    level:
+        com.netflix.config.sources.URLConfigurationSource: ERROR
 
 kafka:
-  bootstrapAddress: kafka:9092
-  numberOfPartitions: 1
-  replicationFactor: 1
-  topicName: as-gateway
+    bootstrapAddress: kafka:9092
+    numberOfPartitions: 1
+    replicationFactor: 1
+    topicName: as-gateway
 
 auth:
-  server:
-    clientKey: oidcCLIENT
-    clientSecret: 91c0fabd17a9db3cfe53f28a10728e39b7724e234ecd78dba1fb05b909fb4ed98c476afc50a634d52808ad3cb2ea744bc8c3b45b7149ec459b5c416a6e8db242
-    endpoint: /auth/token
-    url: http://auth:3005
+    server:
+        clientKey: oidcCLIENT
+        clientSecret: 91c0fabd17a9db3cfe53f28a10728e39b7724e234ecd78dba1fb05b909fb4ed98c476afc50a634d52808ad3cb2ea744bc8c3b45b7149ec459b5c416a6e8db242
+        endpoint: /auth/token
+        url: http://auth:3005
 
 ---
-
 spring:
-  profiles: local
-  datasource:
-    jdbcUrl: jdbc:mysql://localhost:3306/as-gateway
-    continue-on-error: true
+    profiles: local
+    datasource:
+        driver-class-name: org.h2.Driver
+        jdbcUrl: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+        jpa:
+            properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
 
 auth:
-  server:
-    url: http://localhost:3005
+    server:
+        url: http://localhost:3005
 
 kafka:
-  bootstrapAddress: localhost:9092
+    bootstrapAddress: localhost:9092
+
+---
+spring:
+    profiles: test
+    datasource:
+        driver-class-name: org.h2.Driver
+        jdbcUrl: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+    jpa:
+        properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
+
+test: true
