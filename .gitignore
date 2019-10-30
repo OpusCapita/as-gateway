@@ -44,3 +44,5 @@ atlassian-ide-plugin.xml
 # Local eclipse related files
 .project
 .settings
+
+target/**/*

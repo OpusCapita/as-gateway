@@ -9,7 +9,6 @@ public class ASGateway {
 
     public static void main(String[] args) {
         SpringApplication.run(ASGateway.class, args);
-        AS2WebAppListener.staticDestroy ();
     }
 
 }
