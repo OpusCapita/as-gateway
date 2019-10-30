@@ -11,10 +11,10 @@ import java.io.File;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class ASGatewayServletsTests extends BaseTest {
+public class AS2ServletTests extends BaseTest {
 
     @Test
-    public void shouldSendAS2Message() throws Exception {
+    public void shouldSendEDIAS2Message() throws Exception {
         File testFile = new ClassPathResource(
                 "edi/850_X12-4010.txt").getFile();
         File clientKeystore = new ClassPathResource(

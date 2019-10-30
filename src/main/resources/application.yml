@@ -55,6 +55,8 @@ auth:
 kafka:
     bootstrapAddress: localhost:9092
 
+test: true
+
 ---
 spring:
     profiles: test
