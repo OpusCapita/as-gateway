@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 public class AS2ServletTests extends BaseTest {
 
     @Test
-    public void shouldSendEDIAS2Message() throws Exception {
+    public void shouldSendAS2MessageEDI() throws Exception {
         File testFile = new ClassPathResource(
-                "edi/850_X12-4010.txt").getFile();
+                "data/edi-850_X12-4010.txt").getFile();
         File clientKeystore = new ClassPathResource(
                 "testclient.pkcs12").getFile();
 

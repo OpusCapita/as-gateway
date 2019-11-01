@@ -22,6 +22,12 @@ public abstract class BaseTest {
     @Value("${server.port:3056}")
     protected int SERVER_PORT;
 
+    @Value("${as2.urlmapping:/as2}")
+    protected String AS2_MAPPING;
+
+    @Value(("${as4.urlmapping:/as4}"))
+    protected String AS4_MAPPING;
+
     protected String getServerUrl() {
         return String.format("%s://%s:%d", SERVER_SCHEME, SERVER_HOST, SERVER_PORT);
     }
