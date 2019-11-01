@@ -20,6 +20,8 @@ spring:
         include: commons,mysql,queue,snc
 
 server:
+    scheme: http
+    host: localhost
     port: 3056
 
 logging:
@@ -55,6 +57,9 @@ auth:
 kafka:
     bootstrapAddress: localhost:9092
 
+server:
+    port: 6789
+
 test: true
 
 ---
@@ -65,5 +70,8 @@ spring:
         jdbcUrl: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
     jpa:
         properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
+
+server:
+    port: 6789
 
 test: true
