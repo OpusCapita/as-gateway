@@ -1,9 +1,7 @@
 version: '3.4'
-services:
-  main:
-    volumes:
-      - ./src:/usr/app/src
-      - ./gradle:/usr/app/gradle
-    command: 'gradlew bootRun'
+#services:
+#  main:
+#    volumes:
+#      - ./src:/usr/app/src
 #    command: echo "do nothing"
 #    restart: "no"

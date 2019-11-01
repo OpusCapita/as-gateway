@@ -10,7 +10,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, './src/main/resources/static'),
         publicPath: '/',
-        filename: 'built/bundle-[name].js',
+        filename: 'build/bundle-[name].js',
         library: 'as-gateway-[name]',
         libraryTarget: 'umd',
         umdNamedDefine: true

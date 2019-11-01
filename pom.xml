@@ -115,6 +115,7 @@
     </dependencies>
 
     <build>
+        <finalName>as-gateway</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
