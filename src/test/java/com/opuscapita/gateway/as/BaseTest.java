@@ -13,7 +13,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public abstract class BaseTest {
 
-    @Value("${server.url:http://localhost:3056}")
-    protected String SERVER_URL;
+    @Value("${server.scheme:http}")
+    protected String SERVER_SCHEME;
+
+    @Value("${server.host:localhost}")
+    protected String SERVER_HOST;
+
+    @Value("${server.port:3056}")
+    protected int SERVER_PORT;
+
+    protected String getServerUrl() {
+        return String.format("%s://%s:%d", SERVER_SCHEME, SERVER_HOST, SERVER_PORT);
+    }
 
 }
