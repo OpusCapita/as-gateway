@@ -26,8 +26,8 @@ public class ASGatewayServlets {
     @Autowired
     private ServletContext context;
 
-    @Value("classpath:as/as2config.xml")
-    private Resource as2Config;
+    @Value("${as2.config:config/as2config.xml2}")
+    private String as2Config;
 
     @Value("${as2.urlmapping:/as2}")
     private String as2UrlMapping;
@@ -41,13 +41,14 @@ public class ASGatewayServlets {
     }
 
     @Bean
-    public ServletRegistrationBean<AS2ReceiveServlet> as2Servlet() throws IOException {
+    public ServletRegistrationBean<AS2ReceiveServlet> as2Servlet() {
         final ServletRegistrationBean<AS2ReceiveServlet> servlet =
                 new ServletRegistrationBean<>(new AS2ReceiveServlet(), as2UrlMapping);
+
         final Map<String, String> params = new HashMap<>();
         params.put(
                 AbstractAS2ReceiveXServletHandler.SERVLET_INIT_PARAM_AS2_SERVLET_CONFIG_FILENAME,
-                as2Config.getFile().getAbsolutePath()
+                as2Config
         );
         servlet.setInitParameters(params);
 

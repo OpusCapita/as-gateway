@@ -25,6 +25,7 @@ you can also compile a fat jar easily just by running:
 The folder structure is standard with the exception of the frontend. Below some highlighted areas of the code:
 
     .
+    ├── config              # External config that cannot reside in src/main/resources
     ├── src                 
     │   ├── main
     │   │   ├── client      # Frontend written in React

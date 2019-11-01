@@ -7,6 +7,7 @@ WORKDIR $APP_HOME
 COPY mvnw package.json package-lock.json pom.xml webpack.config.js $APP_HOME
 COPY .mvn $APP_HOME/.mvn
 COPY src $APP_HOME/src
+COPY config $APP_HOME/config
 
 RUN chmod +x ./mvnw
 RUN ./mvnw clean install || return 0
@@ -25,6 +26,7 @@ ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
 
 COPY --from=TEMP_BUILD_IMAGE $APP_HOME/target/as-gateway.jar .
+COPY --from=TEMP_BUILD_IMAGE $APP_HOME/config .
 
 HEALTHCHECK --interval=15s --timeout=30s --start-period=40s --retries=15 \
   CMD curl --silent --fail http://localhost:3037/api/health/check || exit 1

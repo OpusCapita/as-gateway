@@ -19,6 +19,9 @@ spring:
     profiles:
         include: commons,mysql,queue,snc
 
+as2:
+    config: config/as2config.xml
+
 server:
     scheme: http
     host: localhost
