@@ -46,3 +46,8 @@ atlassian-ide-plugin.xml
 .settings
 
 target/**/*
+
+# frontend
+node/**/*
+node_modules/**/*
+src/main/resources/static/build/**/*
