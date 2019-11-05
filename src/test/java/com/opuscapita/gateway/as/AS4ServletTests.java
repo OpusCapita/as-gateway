@@ -1,10 +1,12 @@
 package com.opuscapita.gateway.as;
 
-import com.helger.commons.collection.impl.ICommonsList;
 import com.helger.commons.io.resource.ClassPathResource;
+import com.helger.commons.mime.CMimeType;
 import com.helger.phase4.CAS4;
+import com.helger.phase4.attachment.EAS4CompressionMode;
 import com.helger.phase4.client.AS4ClientUserMessage;
-import com.helger.phase4.ebms3header.Ebms3Property;
+import com.helger.phase4.crypto.ECryptoAlgorithmSign;
+import com.helger.phase4.crypto.ECryptoAlgorithmSignDigest;
 import com.helger.phase4.messaging.domain.MessageHelperMethods;
 import com.helger.phase4.soap.ESOAPVersion;
 import com.helger.phase4.util.AS4ResourceHelper;
@@ -17,13 +19,32 @@ import javax.annotation.Nonnull;
 
 public class AS4ServletTests extends BaseTest {
 
-    private static String DEFAULT_AGREEMENT = "an-agreement-ref";
+    private static String DEFAULT_AGREEMENT = "urn:as4:agreements:so-that-we-have-a-non-empty-value";
 
     @Test
     public void shouldSendNonEncryptedXMLMessage() throws Exception {
         AS4ResourceHelper resourceHelper = new AS4ResourceHelper();
         final AS4ClientUserMessage aClient = _getMandatoryAttributesSuccessMessage(resourceHelper);
         aClient.setPayload(DOMReader.readXMLDOM(new ClassPathResource("data/helloworld.xml")));
+        final IMicroDocument aDoc = aClient.sendMessageAndGetMicroDocument(getServerUrl() + AS4_MAPPING);
+    }
+
+    @Test
+    public void sendOneAttachmentSignedMessageSuccessful() throws Exception {
+        AS4ResourceHelper resourceHelper = new AS4ResourceHelper();
+        final AS4ClientUserMessage aClient = _getMandatoryAttributesSuccessMessage(resourceHelper);
+        aClient.addAttachment(new ClassPathResource("data/helloworld.xml").getAsFile(),
+                CMimeType.APPLICATION_XML,
+                (EAS4CompressionMode) null);
+
+        // Keystore
+        setKeyStoreTestData(aClient);
+
+        // Sign specific
+        aClient.signingParams()
+                .setAlgorithmSign(ECryptoAlgorithmSign.RSA_SHA_256)
+                .setAlgorithmSignDigest(ECryptoAlgorithmSignDigest.DIGEST_SHA_256);
+
         final IMicroDocument aDoc = aClient.sendMessageAndGetMicroDocument(getServerUrl() + AS4_MAPPING);
     }
 
@@ -52,8 +73,7 @@ public class AS4ServletTests extends BaseTest {
         return aClient;
     }
 
-    private static AS4ClientUserMessage setKeyStoreTestData (@Nonnull final AS4ClientUserMessage aClient)
-    {
+    private static AS4ClientUserMessage setKeyStoreTestData(@Nonnull final AS4ClientUserMessage aClient) {
         aClient.setKeyStoreResource(new ClassPathResource("testclient.pkcs12"));
         aClient.setKeyStorePassword("test");
         aClient.setKeyStoreType(EKeyStoreType.PKCS12);
