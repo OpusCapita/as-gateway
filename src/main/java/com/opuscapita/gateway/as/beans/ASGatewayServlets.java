@@ -1,22 +1,17 @@
 package com.opuscapita.gateway.as.beans;
 
 import com.helger.as2servlet.AS2ReceiveServlet;
-import com.helger.as2servlet.AS2WebAppListener;
 import com.helger.as2servlet.AbstractAS2ReceiveXServletHandler;
 import com.helger.phase4.servlet.AS4Servlet;
-import com.helger.photon.core.servlet.WebAppListener;
 import com.helger.web.scope.mgr.WebScopeManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.*;
-import org.springframework.core.io.Resource;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,9 +30,10 @@ public class ASGatewayServlets {
     @Value(("${as4.urlmapping:/as4}"))
     private String as4UrlMapping;
 
+
     @PostConstruct
     public void initServletContext() {
-        AS2WebAppListener.staticInit(context);
+        WebScopeManager.onGlobalBegin(context);
     }
 
     @Bean
@@ -56,7 +52,7 @@ public class ASGatewayServlets {
     }
 
     @Bean
-    public ServletRegistrationBean<HttpServlet> as4ServletBean(ServletContext context) {
+    public ServletRegistrationBean<HttpServlet> as4ServletBean() {
         return new ServletRegistrationBean<>(new AS4Servlet(), as4UrlMapping);
     }
 

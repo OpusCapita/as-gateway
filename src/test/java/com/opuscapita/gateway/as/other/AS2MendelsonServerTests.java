@@ -21,7 +21,7 @@ import javax.activation.FileDataSource;
 import java.io.File;
 import java.security.cert.X509Certificate;
 
-public class AS2TestServerCall {
+public class AS2MendelsonServerTests {
 
     @Ignore
     @Test

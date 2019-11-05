@@ -51,3 +51,6 @@ target/**/*
 node/**/*
 node_modules/**/*
 src/main/resources/static/build/**/*
+
+# AS2/4 data folder
+as4-incoming/**/*
